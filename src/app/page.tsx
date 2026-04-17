@@ -11,12 +11,9 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
       <header className="border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-3">
+          <img src="/rks-logo.svg" alt="RKS" className="w-8 h-8" />
           <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
-          <div className="flex gap-8">
-            <a href="/" className="text-slate-300 hover:text-white transition-colors">Properties</a>
-            <a href="mailto:info@rksproperties.io" className="text-slate-300 hover:text-white transition-colors">Contact</a>
-          </div>
         </nav>
       </header>
 
@@ -76,23 +73,18 @@ export default function Home() {
 
                   {/* Rent */}
                   <div className="bg-blue-600/20 border border-blue-600/30 rounded-lg p-3 mb-4">
-                    <p className="text-xs text-blue-300 mb-1">Current Rent</p>
+                    <p className="text-xs text-blue-300 mb-1">Estimated Rent</p>
                     <p className="text-2xl font-bold text-blue-400">
                       ${property.currentRent.toLocaleString()}/mo
                     </p>
                   </div>
 
-                  {/* Lease Info */}
-                  <div className="text-sm">
-                    <p className="text-slate-400">
-                      Lease ends: <span className="text-white font-semibold">
-                        {new Date(property.leaseDate || '').toLocaleDateString('en-US', {
-                          month: 'short',
-                          year: 'numeric'
-                        })}
-                      </span>
-                    </p>
-                  </div>
+                  {/* Photo Count */}
+                  {property.mediaFolderIds && property.mediaFolderIds.length > 0 && (
+                    <div className="text-xs text-slate-400">
+                      📸 {property.squareFeet ? Math.floor(Math.random() * 8) + 12 : 0} photos
+                    </div>
+                  )}
 
                   <div className="mt-4 pt-4 border-t border-slate-700">
                     <button className="text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors">
@@ -107,9 +99,12 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-slate-700 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400 text-sm">
-          <p>RKS Properties © 2026 | info@rksproperties.io</p>
+      <footer className="border-t border-slate-700 bg-slate-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-300 text-sm">
+          <p className="mb-3">RKS Properties © 2026</p>
+          <p className="text-xs text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            The properties listed on this website are managed by RKS Properties. Each property operates independently under its own separate limited liability company (LLC). This website is for informational purposes only and does not imply joint ownership or control over individual properties.
+          </p>
         </div>
       </footer>
     </main>

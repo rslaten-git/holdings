@@ -28,10 +28,13 @@ export default function PropertyDetail() {
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
       <header className="border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
-          <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors">
-            ← Back to Properties
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <img src="/rks-logo.svg" alt="RKS" className="w-8 h-8" />
+            <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
+          </div>
+          <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors text-sm">
+            ← All Properties
           </Link>
         </nav>
       </header>
@@ -99,10 +102,16 @@ export default function PropertyDetail() {
                 <p className="text-white font-semibold">Leased</p>
               </div>
               <div>
-                <p className="text-slate-400 text-sm mb-1">Current Rent</p>
-                <p className="text-3xl font-bold text-blue-400">
-                  ${property.currentRent.toLocaleString()}/mo
-                </p>
+                <p className="text-slate-400 text-sm mb-1">Estimated Rent</p>
+                {property.type === 'Duplex' ? (
+                  <p className="text-sm text-slate-300">
+                    ${property.currentRent.toLocaleString()}/mo per unit
+                  </p>
+                ) : (
+                  <p className="text-3xl font-bold text-blue-400">
+                    ${property.currentRent.toLocaleString()}/mo
+                  </p>
+                )}
               </div>
               <div>
                 <p className="text-slate-400 text-sm mb-1">Lease Ends</p>
@@ -113,6 +122,9 @@ export default function PropertyDetail() {
                     year: 'numeric'
                   })}
                 </p>
+                {property.type === 'Duplex' && (
+                  <p className="text-xs text-slate-400 mt-2">Applies to both units</p>
+                )}
               </div>
             </div>
           </div>
@@ -164,9 +176,12 @@ export default function PropertyDetail() {
       </div>
 
       {/* Footer */}
-      <footer className="border-t border-slate-700 bg-slate-900/50 mt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400 text-sm">
-          <p>RKS Properties © 2026 | info@rksproperties.io</p>
+      <footer className="border-t border-slate-700 bg-slate-950 mt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-300 text-sm">
+          <p className="mb-3">RKS Properties © 2026</p>
+          <p className="text-xs text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            The properties listed on this website are managed by RKS Properties. Each property operates independently under its own separate limited liability company (LLC). This website is for informational purposes only and does not imply joint ownership or control over individual properties.
+          </p>
         </div>
       </footer>
     </main>
