@@ -14,38 +14,6 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Dynamically load photos from public folder
-    const loadPhotos = async () => {
-      try {
-        // Import all photos from the property folder
-        const photoModules = import.meta.glob('/public/photos/*/*.jpg', {
-          eager: false,
-          import: 'default'
-        });
-
-        const propertyPhotos: Photo[] = [];
-        
-        for (const [path] of Object.entries(photoModules)) {
-          if (path.includes(`/public/photos/${slug}/`)) {
-            const filename = path.split('/').pop() || '';
-            propertyPhotos.push({
-              src: `/photos/${slug}/${filename}`,
-              alt: `${slug} photo`
-            });
-          }
-        }
-
-        // Sort by filename for consistent order
-        propertyPhotos.sort((a, b) => a.src.localeCompare(b.src));
-        setPhotos(propertyPhotos);
-      } catch (error) {
-        console.error('Error loading photos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    // For now, use a simpler approach - fetch image list
     const fetchPhotoList = async () => {
       try {
         const response = await fetch(`/api/photos-list?slug=${slug}`);
