@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { MapPin, Bed, Bath, Home, CheckCircle } from 'lucide-react';
+import { MapPin, Bed, Bath, Home, CheckCircle, Car } from 'lucide-react';
 import { properties } from '@/lib/properties';
 
 export default function HomePage() {
@@ -34,16 +34,20 @@ export default function HomePage() {
               className="group"
             >
               <div className="h-full bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all overflow-hidden hover:shadow-2xl hover:shadow-blue-500/20">
-                {/* Image area */}
-                <div className="h-44 bg-gradient-to-br from-slate-700 to-slate-800 relative overflow-hidden flex items-center justify-center">
-                  <Home className="w-16 h-16 text-slate-600" />
+                {/* Photo */}
+                <div className="h-48 relative overflow-hidden bg-slate-700">
+                  <img
+                    src={property.thumbnail}
+                    alt={property.address}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
                   {/* Occupancy badge */}
                   <div className="absolute top-3 right-3 flex items-center gap-1 bg-green-600/90 text-white text-xs font-bold px-2.5 py-1 rounded-full">
                     <CheckCircle className="w-3 h-3" />
                     Occupied
                   </div>
                   {/* Type badge */}
-                  <div className="absolute bottom-3 left-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded">
+                  <div className="absolute bottom-3 left-3 bg-black/60 text-white text-xs px-2.5 py-1 rounded">
                     {property.type}
                   </div>
                 </div>
@@ -66,16 +70,16 @@ export default function HomePage() {
                   </p>
 
                   {/* Stats row */}
-                  <div className="flex gap-3 mb-3 text-sm text-slate-300">
+                  <div className="flex flex-wrap gap-3 mb-3 text-sm text-slate-300">
                     <span className="flex items-center gap-1">
                       <Bed className="w-4 h-4" /> {property.bedrooms} bed
                     </span>
                     <span className="flex items-center gap-1">
                       <Bath className="w-4 h-4" /> {property.bathrooms} bath
                     </span>
-                    {property.garage && (
-                      <span className="text-slate-400">🚗 Garage</span>
-                    )}
+                    <span className="flex items-center gap-1">
+                      <Car className="w-4 h-4" /> {property.parking}
+                    </span>
                   </div>
 
                   {/* Rent */}
