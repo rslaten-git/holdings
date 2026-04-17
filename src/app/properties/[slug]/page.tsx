@@ -143,7 +143,7 @@ export default function PropertyDetail() {
         </div>
 
         {/* Photo Gallery */}
-        <PropertyPhotos slug={property.slug} />
+        <PropertyPhotos photos={property.photos} />
 
         {/* Virtual Tours */}
         {property.matterports && property.matterports.length > 0 && (

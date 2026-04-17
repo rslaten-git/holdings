@@ -1,35 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-interface Photo {
-  src: string;
-  alt: string;
+interface PropertyPhotosProps {
+  photos: string[];
 }
 
-export default function PropertyPhotos({ slug }: { slug: string }) {
-  const [photos, setPhotos] = useState<Photo[]>([]);
+export default function PropertyPhotos({ photos }: PropertyPhotosProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchPhotoList = async () => {
-      try {
-        const response = await fetch(`/api/photos-list?slug=${slug}`);
-        if (response.ok) {
-          const data = await response.json();
-          setPhotos(data.photos || []);
-        }
-      } catch (error) {
-        console.error('Error fetching photos:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPhotoList();
-  }, [slug]);
+  if (!photos || photos.length === 0) {
+    return null;
+  }
 
   const handleNext = () => {
     setSelectedIndex((prev) => (prev + 1) % photos.length);
@@ -39,24 +22,6 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
     setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length);
   };
 
-  if (loading) {
-    return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-8 text-center mb-12">
-        <p className="text-slate-400">Loading photos...</p>
-      </div>
-    );
-  }
-
-  if (!photos || photos.length === 0) {
-    return (
-      <div className="bg-slate-800 rounded-xl border border-slate-700 p-8 text-center mb-12">
-        <p className="text-slate-400">No photos available yet</p>
-      </div>
-    );
-  }
-
-  const currentPhoto = photos[selectedIndex];
-
   return (
     <div className="mb-12">
       <h2 className="text-3xl font-bold text-white mb-6">Photo Gallery</h2>
@@ -65,8 +30,8 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
         {/* Main Photo */}
         <div className="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900 aspect-video">
           <img
-            src={currentPhoto.src}
-            alt={currentPhoto.alt}
+            src={photos[selectedIndex]}
+            alt={`Property photo ${selectedIndex + 1}`}
             className="w-full h-full object-cover"
           />
           {photos.length > 1 && (
@@ -104,8 +69,8 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
                 aria-label={`View photo ${idx + 1}`}
               >
                 <img
-                  src={photo.src}
-                  alt={photo.alt}
+                  src={photo}
+                  alt={`Thumbnail ${idx + 1}`}
                   className="w-full h-full object-cover"
                 />
               </button>
