@@ -6,8 +6,8 @@ const geist = Geist({ variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "RKS Properties | Residential Rentals",
-  description: "Premium residential properties available for lease",
+  title: "RKS Properties Holdings, LLC | DFW Rentals",
+  description: "DFW rental properties available for lease",
 };
 
 export default function RootLayout({

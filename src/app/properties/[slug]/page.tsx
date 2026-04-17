@@ -31,7 +31,7 @@ export default function PropertyDetail() {
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
             <img src="/rks-logo.svg" alt="RKS" className="w-8 h-8" />
-            <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
+            <h1 className="text-2xl font-bold text-white">RKS Properties Holdings, LLC</h1>
           </div>
           <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors text-sm">
             ← All Properties

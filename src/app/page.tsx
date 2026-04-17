@@ -13,14 +13,14 @@ export default function Home() {
       <header className="border-b border-slate-700">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-3">
           <img src="/rks-logo.svg" alt="RKS" className="w-8 h-8" />
-          <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
+          <h1 className="text-2xl font-bold text-white">RKS Properties Holdings, LLC</h1>
         </nav>
       </header>
 
       {/* Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
         <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-          Quality Residential Properties
+          DFW Rental Properties
         </h2>
         <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
           Professionally managed rental properties throughout the region. 
