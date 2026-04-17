@@ -26,10 +26,12 @@ export default function PropertyDetail() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <header className="border-b border-slate-700">
+      {/* Header with Logo */}
+      <header className="border-b border-slate-700 bg-slate-900/50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-12" />
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-10" />
+          </Link>
           <Link href="/" className="text-blue-400 hover:text-blue-300 transition-colors text-sm">
             ← All Properties
           </Link>

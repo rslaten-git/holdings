@@ -9,19 +9,15 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Header */}
-      <header className="border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
-          <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-12" />
-        </nav>
-      </header>
-
-      {/* Hero */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-          DFW Rental Properties
-        </h2>
-        <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+      {/* Hero with Logo */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+        <div className="flex items-center justify-center gap-8 mb-8">
+          <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-32" />
+          <h2 className="text-5xl md:text-6xl font-bold text-white">
+            DFW Rental Properties
+          </h2>
+        </div>
+        <p className="text-xl text-slate-300 max-w-2xl mx-auto">
           Professionally managed rental properties throughout the region. 
           Explore our portfolio and find your next home.
         </p>
