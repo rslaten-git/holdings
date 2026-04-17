@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Photo {
@@ -9,29 +8,76 @@ interface Photo {
   alt: string;
 }
 
-const PROPERTY_PHOTOS: Record<string, Photo[]> = {
-  lillie1: [
-    { src: '/photos/lillie1/1BQICXfTEKf3zxgzgZfmlSdarD5wSet5w_3513-lillie-st-sachse-tx-75048-High-Res-8.jpg', alt: 'Lillie Property 1' },
-    { src: '/photos/lillie1/1oW5qRCNJikwPtEgJCcOYJ88fhd-Cf9cj_3513-lillie-st-sachse-tx-75048-High-Res-9.jpg', alt: 'Lillie Property 2' },
-    { src: '/photos/lillie1/1S8Hj6KV2fPqvakhEx4T3yBjmQ7haFNX0_3513-lillie-st-sachse-tx-75048-High-Res-7.jpg', alt: 'Lillie Property 3' },
-    { src: '/photos/lillie1/1_WJwd2Sd0tX2cqWjoC1ItJTjp0g-xrKw_3513-lillie-st-sachse-tx-75048-High-Res-10.jpg', alt: 'Lillie Property 4' },
-    { src: '/photos/lillie1/1yZdVKJajDJH2FyniAH-4C9H4Gt3CQOpO_3513-lillie-st-sachse-tx-75048-High-Res-11.jpg', alt: 'Lillie Property 5' },
-  ],
-  wyndham1: [
-    { src: '/photos/wyndham1/1bqVDdvgPbtdLxes6DdOlIulmfo6ePtUn_212-wyndham-meadows-way-wylie-tx-75098-High-Res-8.jpg', alt: 'Wyndham Property 1' },
-    { src: '/photos/wyndham1/1hbznhVUo-ADvH6tG7OABz8n9z7JwQmUq_212-wyndham-meadows-way-wylie-tx-75098-High-Res-12.jpg', alt: 'Wyndham Property 2' },
-    { src: '/photos/wyndham1/1JRcJV3FheDSE8V24Egd_uSd58cim0wet_212-wyndham-meadows-way-wylie-tx-75098-High-Res-13.jpg', alt: 'Wyndham Property 3' },
-    { src: '/photos/wyndham1/1lRMiUCTJdtjzvDG_bDQ1t9E_KtNkkGNi_212-wyndham-meadows-way-wylie-tx-75098-High-Res-7.jpg', alt: 'Wyndham Property 4' },
-    { src: '/photos/wyndham1/1PGjw2ckHhtmZghIoJUMCA5YHyeDZ3b-d_212-wyndham-meadows-way-wylie-tx-75098-High-Res-11.jpg', alt: 'Wyndham Property 5' },
-  ],
-  masters1: [],
-  clinton1: [],
-  pinetrail1: [],
-};
-
 export default function PropertyPhotos({ slug }: { slug: string }) {
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const photos = PROPERTY_PHOTOS[slug] || [];
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Dynamically load photos from public folder
+    const loadPhotos = async () => {
+      try {
+        // Import all photos from the property folder
+        const photoModules = import.meta.glob('/public/photos/*/*.jpg', {
+          eager: false,
+          import: 'default'
+        });
+
+        const propertyPhotos: Photo[] = [];
+        
+        for (const [path] of Object.entries(photoModules)) {
+          if (path.includes(`/public/photos/${slug}/`)) {
+            const filename = path.split('/').pop() || '';
+            propertyPhotos.push({
+              src: `/photos/${slug}/${filename}`,
+              alt: `${slug} photo`
+            });
+          }
+        }
+
+        // Sort by filename for consistent order
+        propertyPhotos.sort((a, b) => a.src.localeCompare(b.src));
+        setPhotos(propertyPhotos);
+      } catch (error) {
+        console.error('Error loading photos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // For now, use a simpler approach - fetch image list
+    const fetchPhotoList = async () => {
+      try {
+        const response = await fetch(`/api/photos-list?slug=${slug}`);
+        if (response.ok) {
+          const data = await response.json();
+          setPhotos(data.photos || []);
+        }
+      } catch (error) {
+        console.error('Error fetching photos:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPhotoList();
+  }, [slug]);
+
+  const handleNext = () => {
+    setSelectedIndex((prev) => (prev + 1) % photos.length);
+  };
+
+  const handlePrev = () => {
+    setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  };
+
+  if (loading) {
+    return (
+      <div className="bg-slate-800 rounded-xl border border-slate-700 p-8 text-center mb-12">
+        <p className="text-slate-400">Loading photos...</p>
+      </div>
+    );
+  }
 
   if (!photos || photos.length === 0) {
     return (
@@ -42,14 +88,6 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
   }
 
   const currentPhoto = photos[selectedIndex];
-
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % photos.length);
-  };
-
-  const handlePrev = () => {
-    setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length);
-  };
 
   return (
     <div className="mb-12">
@@ -85,7 +123,7 @@ export default function PropertyPhotos({ slug }: { slug: string }) {
 
         {/* Thumbnails */}
         {photos.length > 1 && (
-          <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
             {photos.map((photo, idx) => (
               <button
                 key={idx}
