@@ -7,6 +7,7 @@ export interface Property {
   currentRent: number;
   yearBuilt: number;
   address: string;
+  city: string;
   squareFeet: number;
   bedrooms: number;
   bathrooms: number;
@@ -24,11 +25,12 @@ export const properties: Record<string, Property> = {
   lillie1: {
     id: 'lillie',
     slug: 'lillie1',
-    llcName: 'Lillie 1 LLC',
+    llcName: 'Lillie 1, LLC',
     email: 'lillie1@rksproperties.io',
     currentRent: 2400,
     yearBuilt: 1995,
     address: '3509 & 3513 Lillie Lane',
+    city: 'Sachse',
     squareFeet: 2100,
     bedrooms: 2,
     bathrooms: 1.5,
@@ -44,11 +46,12 @@ export const properties: Record<string, Property> = {
   masters1: {
     id: 'masters',
     slug: 'masters1',
-    llcName: 'Masters 1 LLC',
+    llcName: 'Masters 1, LLC',
     email: 'masters1@rksproperties.io',
     currentRent: 2200,
     yearBuilt: 1998,
-    address: 'Masters Property',
+    address: '503 Masters Ave',
+    city: 'Wylie',
     squareFeet: 1950,
     bedrooms: 3,
     bathrooms: 1,
@@ -63,11 +66,12 @@ export const properties: Record<string, Property> = {
   clinton1: {
     id: 'clinton',
     slug: 'clinton1',
-    llcName: 'Clinton I LLC',
+    llcName: 'Clinton I, LLC',
     email: 'clinton1@rksproperties.io',
     currentRent: 1800,
     yearBuilt: 2001,
-    address: 'Clinton Property',
+    address: '3107 Clinton St',
+    city: 'Sachse',
     squareFeet: 1650,
     bedrooms: 3,
     bathrooms: 2,
@@ -82,11 +86,12 @@ export const properties: Record<string, Property> = {
   wyndham1: {
     id: 'wyndham',
     slug: 'wyndham1',
-    llcName: 'Wyndham Meadows 1 LLC',
+    llcName: 'Wyndham Meadows 1, LLC',
     email: 'wyndham1@rksproperties.io',
     currentRent: 2800,
     yearBuilt: 1992,
     address: '210 & 212 Wyndham Boulevard',
+    city: 'Wylie',
     squareFeet: 2400,
     bedrooms: 2,
     bathrooms: 2,
@@ -102,11 +107,12 @@ export const properties: Record<string, Property> = {
   pinetrail1: {
     id: 'pinetrail',
     slug: 'pinetrail1',
-    llcName: 'Pine Trail 1 LLC',
+    llcName: 'Pine Trail 1, LLC',
     email: 'pinetrail1@rksproperties.io',
     currentRent: 2100,
     yearBuilt: 2005,
     address: '505 & 507 Pine Trail Drive',
+    city: 'Allen',
     squareFeet: 2000,
     bedrooms: 2,
     bathrooms: 2,

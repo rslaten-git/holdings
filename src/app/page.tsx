@@ -38,10 +38,21 @@ export default function Home() {
               className="group"
             >
               <div className="h-full bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all overflow-hidden hover:shadow-2xl hover:shadow-blue-500/20">
-                {/* Image Placeholder */}
-                <div className="h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center relative overflow-hidden">
-                  <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
-                    <Building2 className="w-full h-full text-blue-400" />
+                {/* Image */}
+                <div className="h-48 bg-gradient-to-br from-slate-700 to-slate-900 flex items-center justify-center relative overflow-hidden">
+                  {/* Try to load first photo if available */}
+                  <img
+                    src={`/api/photos-list?slug=${property.slug}`}
+                    alt={property.llcName}
+                    className="hidden"
+                    onLoad={() => {
+                      // Will load actual photo via separate fetch
+                    }}
+                  />
+                  {/* Fallback: show property type badge over gradient */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-blue-800/20"></div>
+                  <div className="absolute top-3 right-3 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full">
+                    ✓ Occupied
                   </div>
                   <span className="relative text-white text-sm font-semibold bg-black/30 px-4 py-2 rounded">
                     {property.type}
@@ -50,9 +61,13 @@ export default function Home() {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                  <h3 className="text-xl font-bold text-white mb-1 group-hover:text-blue-400 transition-colors">
                     {property.llcName}
                   </h3>
+                  
+                  <div className="text-lg font-bold text-blue-400 mb-3">
+                    {property.city}
+                  </div>
                   
                   <div className="flex items-start gap-2 text-slate-300 mb-4">
                     <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
@@ -74,17 +89,18 @@ export default function Home() {
                   {/* Rent */}
                   <div className="bg-blue-600/20 border border-blue-600/30 rounded-lg p-3 mb-4">
                     <p className="text-xs text-blue-300 mb-1">Estimated Rent</p>
-                    <p className="text-2xl font-bold text-blue-400">
-                      ${property.currentRent.toLocaleString()}/mo
-                    </p>
+                    {property.type === 'Duplex' ? (
+                      <p className="text-sm font-bold text-blue-400">
+                        ${Math.round(property.currentRent / 2).toLocaleString()}/mo per unit
+                      </p>
+                    ) : (
+                      <p className="text-2xl font-bold text-blue-400">
+                        ${property.currentRent.toLocaleString()}/mo
+                      </p>
+                    )}
                   </div>
 
-                  {/* Photo Count */}
-                  {property.mediaFolderIds && property.mediaFolderIds.length > 0 && (
-                    <div className="text-xs text-slate-400">
-                      📸 {property.squareFeet ? Math.floor(Math.random() * 8) + 12 : 0} photos
-                    </div>
-                  )}
+
 
                   <div className="mt-4 pt-4 border-t border-slate-700">
                     <button className="text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors">
