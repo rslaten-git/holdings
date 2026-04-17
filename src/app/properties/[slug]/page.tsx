@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { getProperty } from '@/lib/properties';
 import { Building2, Calendar, MapPin, Ruler, Bed, Bath, Car, Home } from 'lucide-react';
+import PropertyPhotos from '@/components/PropertyPhotos';
 
 export default function PropertyDetail() {
   const params = useParams();
@@ -116,6 +117,9 @@ export default function PropertyDetail() {
             </div>
           </div>
         </div>
+
+        {/* Photo Gallery */}
+        <PropertyPhotos slug={property.slug} />
 
         {/* Virtual Tours */}
         {property.matterports && property.matterports.length > 0 && (
