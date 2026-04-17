@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geist.variable} ${geistMono.variable} bg-slate-900 text-white`}>
         {children}
-        <footer className="border-t border-slate-700 bg-slate-900 mt-20">
+        <footer className="border-t border-slate-700 bg-slate-900">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
             <p className="text-slate-300 text-sm mb-2">For more information: <a href="mailto:info@rksproperties.io" className="text-blue-400 hover:text-blue-300 transition-colors">info@rksproperties.io</a></p>
             <p className="text-slate-500 text-xs mb-2">RKS Properties Holdings, LLC © 2026</p>
