@@ -28,14 +28,14 @@ export const properties: Record<string, Property> = {
     email: 'lillie1@rksproperties.io',
     currentRent: 2400,
     yearBuilt: 1995,
-    address: '3509 Lillie Lane',
+    address: '3509 & 3513 Lillie Lane',
     squareFeet: 2100,
-    bedrooms: 4,
-    bathrooms: 2,
-    type: 'Single Family',
-    garage: true,
+    bedrooms: 2,
+    bathrooms: 1.5,
+    type: 'Duplex',
+    garage: false,
     leaseStatus: 'leased',
-    leaseDate: '2024-06-01',
+    leaseDate: '2025-08-31',
     matterports: [
       'https://my.matterport.com/show/?m=gXEhNcoGJh5&mls=1',
       'https://my.matterport.com/show/?m=b8gyzcC1SXt&mls=1'
@@ -51,11 +51,11 @@ export const properties: Record<string, Property> = {
     address: 'Masters Property',
     squareFeet: 1950,
     bedrooms: 3,
-    bathrooms: 2,
+    bathrooms: 1,
     type: 'Single Family',
     garage: true,
     leaseStatus: 'leased',
-    leaseDate: '2024-08-01',
+    leaseDate: '2026-03-31',
     matterports: [
       'https://my.matterport.com/show/?m=atGMyRsLP1k&mls=1'
     ]
@@ -70,11 +70,11 @@ export const properties: Record<string, Property> = {
     address: 'Clinton Property',
     squareFeet: 1650,
     bedrooms: 3,
-    bathrooms: 1.5,
+    bathrooms: 2,
     type: 'Single Family',
     garage: false,
     leaseStatus: 'leased',
-    leaseDate: '2024-05-15',
+    leaseDate: '2026-11-30',
     matterports: [
       'https://my.matterport.com/show/?m=676mecfjrYZ&mls=1'
     ]
@@ -86,14 +86,14 @@ export const properties: Record<string, Property> = {
     email: 'wyndham1@rksproperties.io',
     currentRent: 2800,
     yearBuilt: 1992,
-    address: '210 Wyndham Boulevard',
+    address: '210 & 212 Wyndham Boulevard',
     squareFeet: 2400,
-    bedrooms: 4,
-    bathrooms: 2.5,
+    bedrooms: 2,
+    bathrooms: 2,
     type: 'Duplex',
     garage: true,
     leaseStatus: 'leased',
-    leaseDate: '2024-07-01',
+    leaseDate: '2025-12-31',
     matterports: [
       'https://my.matterport.com/show/?m=QNqo2fpYcCi&mls=1',
       'https://my.matterport.com/show/?m=74BirLs72nE&mls=1'
@@ -106,14 +106,14 @@ export const properties: Record<string, Property> = {
     email: 'pinetrail1@rksproperties.io',
     currentRent: 2100,
     yearBuilt: 2005,
-    address: '505 Pine Trail Drive',
+    address: '505 & 507 Pine Trail Drive',
     squareFeet: 2000,
-    bedrooms: 3,
+    bedrooms: 2,
     bathrooms: 2,
-    type: 'Single Family',
-    garage: true,
+    type: 'Duplex',
+    garage: false,
     leaseStatus: 'leased',
-    leaseDate: '2024-09-01',
+    leaseDate: '2026-01-31',
     matterports: [
       'https://my.matterport.com/show/?m=Mgb1AqrSXqm&mls=1',
       'https://my.matterport.com/show/?m=D63HaUe4Vzp&mls=1'
@@ -126,5 +126,5 @@ export function getProperty(slug: string): Property | null {
 }
 
 export function getRentEstimate(currentRent: number): number {
-  return Math.round(currentRent * 1.05);
+  return currentRent;
 }

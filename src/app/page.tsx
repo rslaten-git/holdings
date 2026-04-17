@@ -1,74 +1,117 @@
 'use client';
 
 import Link from 'next/link';
-
-const properties = [
-  { id: 'lillie', name: 'Lillie 1 LLC', slug: 'lillie1' },
-  { id: 'masters', name: 'Masters 1 LLC', slug: 'masters1' },
-  { id: 'clinton', name: 'Clinton I LLC', slug: 'clinton1' },
-  { id: 'wyndham', name: 'Wyndham Meadows 1 LLC', slug: 'wyndham1' },
-  { id: 'pinetrail', name: 'Pine Trail 1 LLC', slug: 'pinetrail1' },
-];
+import { Building2, MapPin, Bed, Bath } from 'lucide-react';
+import { properties } from '@/lib/properties';
 
 export default function Home() {
+  const propertyList = Object.values(properties);
+
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Properties</h2>
-        <p className="text-xl text-gray-600">
-          Residential properties across the portfolio
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {properties.map((property) => (
-          <Link
-            key={property.id}
-            href={`/properties/${property.slug}`}
-            className="group"
-          >
-            <div className="bg-white rounded-lg shadow hover:shadow-lg transition-shadow cursor-pointer overflow-hidden">
-              <div className="bg-gradient-to-br from-blue-500 to-blue-600 h-48 flex items-center justify-center">
-                <span className="text-white text-4xl font-bold opacity-20">
-                  {property.name.split(' ')[0]}
-                </span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                  {property.name}
-                </h3>
-                <p className="text-gray-600 text-sm mb-4">
-                  Click to view details, photos, and floor plans
-                </p>
-                <button className="text-blue-600 font-semibold hover:text-blue-800">
-                  View Property →
-                </button>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <div className="mt-16 bg-white rounded-lg shadow p-8">
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact</h3>
-        <p className="text-gray-700 mb-6">
-          For inquiries about specific properties or general questions about our portfolio:
-        </p>
-        <div className="grid grid-cols-2 gap-8">
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-2">Property-Specific Inquiries</h4>
-            <p className="text-gray-600 text-sm">Each property has its own contact email listed on the property details page.</p>
+    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Header */}
+      <header className="border-b border-slate-700">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-white">RKS Properties</h1>
+          <div className="flex gap-8">
+            <a href="/" className="text-slate-300 hover:text-white transition-colors">Properties</a>
+            <a href="mailto:info@rksproperties.io" className="text-slate-300 hover:text-white transition-colors">Contact</a>
           </div>
-          <div>
-            <h4 className="font-semibold text-gray-900 mb-2">General Inquiries</h4>
-            <p className="text-gray-600 text-sm">
-              <a href="mailto:info@rksproperties.io" className="text-blue-600 hover:underline font-medium">
-                info@rksproperties.io
-              </a>
-            </p>
-          </div>
+        </nav>
+      </header>
+
+      {/* Hero */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          Quality Residential Properties
+        </h2>
+        <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+          Professionally managed rental properties throughout the region. 
+          Explore our portfolio and find your next home.
+        </p>
+      </section>
+
+      {/* Properties Grid */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {propertyList.map((property) => (
+            <Link
+              key={property.id}
+              href={`/properties/${property.slug}`}
+              className="group"
+            >
+              <div className="h-full bg-slate-800 rounded-xl border border-slate-700 hover:border-blue-500 transition-all overflow-hidden hover:shadow-2xl hover:shadow-blue-500/20">
+                {/* Image Placeholder */}
+                <div className="h-48 bg-gradient-to-br from-blue-600 to-blue-800 flex items-center justify-center relative overflow-hidden">
+                  <div className="absolute inset-0 opacity-20 group-hover:opacity-30 transition-opacity">
+                    <Building2 className="w-full h-full text-blue-400" />
+                  </div>
+                  <span className="relative text-white text-sm font-semibold bg-black/30 px-4 py-2 rounded">
+                    {property.type}
+                  </span>
+                </div>
+
+                {/* Content */}
+                <div className="p-6">
+                  <h3 className="text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                    {property.llcName}
+                  </h3>
+                  
+                  <div className="flex items-start gap-2 text-slate-300 mb-4">
+                    <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <p className="text-sm">{property.address}</p>
+                  </div>
+
+                  {/* Quick Stats */}
+                  <div className="flex gap-4 mb-4 text-sm text-slate-300">
+                    <div className="flex items-center gap-1">
+                      <Bed className="w-4 h-4" />
+                      <span>{property.bedrooms} bed</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Bath className="w-4 h-4" />
+                      <span>{property.bathrooms} bath</span>
+                    </div>
+                  </div>
+
+                  {/* Rent */}
+                  <div className="bg-blue-600/20 border border-blue-600/30 rounded-lg p-3 mb-4">
+                    <p className="text-xs text-blue-300 mb-1">Current Rent</p>
+                    <p className="text-2xl font-bold text-blue-400">
+                      ${property.currentRent.toLocaleString()}/mo
+                    </p>
+                  </div>
+
+                  {/* Lease Info */}
+                  <div className="text-sm">
+                    <p className="text-slate-400">
+                      Lease ends: <span className="text-white font-semibold">
+                        {new Date(property.leaseDate || '').toLocaleDateString('en-US', {
+                          month: 'short',
+                          year: 'numeric'
+                        })}
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="mt-4 pt-4 border-t border-slate-700">
+                    <button className="text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors">
+                      View Details →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-slate-700 bg-slate-900/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400 text-sm">
+          <p>RKS Properties © 2026 | info@rksproperties.io</p>
+        </div>
+      </footer>
     </main>
   );
 }

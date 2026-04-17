@@ -6,8 +6,8 @@ const geist = Geist({ variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
-  title: "RKS Properties Holdings",
-  description: "Residential Properties Portfolio",
+  title: "RKS Properties | Residential Rentals",
+  description: "Premium residential properties available for lease",
 };
 
 export default function RootLayout({
@@ -17,51 +17,37 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${geist.variable} ${geistMono.variable} bg-gray-50`}>
-        <nav className="bg-white shadow">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <h1 className="text-2xl font-bold text-gray-900">
-                RKS Properties Holdings
-              </h1>
-              <div className="flex gap-4">
-                <a href="/" className="text-gray-700 hover:text-gray-900">
-                  Properties
-                </a>
-                <a href="#contact" className="text-gray-700 hover:text-gray-900">
-                  Contact
-                </a>
-              </div>
-            </div>
-          </div>
-        </nav>
+      <body className={`${geist.variable} ${geistMono.variable} bg-slate-900 text-white`}>
         {children}
-        <footer className="bg-gray-900 text-white mt-16 py-12">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-4 gap-8 mb-8">
-              <div>
-                <h3 className="font-bold mb-4">Lillie 1 LLC</h3>
-                <p className="text-sm text-gray-400">lillie1@rksproperties.io</p>
-              </div>
-              <div>
-                <h3 className="font-bold mb-4">Masters 1 LLC</h3>
-                <p className="text-sm text-gray-400">masters1@rksproperties.io</p>
-              </div>
-              <div>
-                <h3 className="font-bold mb-4">Clinton I LLC</h3>
-                <p className="text-sm text-gray-400">clinton1@rksproperties.io</p>
-              </div>
-              <div>
-                <h3 className="font-bold mb-4">Wyndham Meadows 1 LLC</h3>
-                <p className="text-sm text-gray-400">wyndham1@rksproperties.io</p>
+        <footer className="border-t border-slate-700 bg-slate-900/50 mt-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="mb-8">
+              <h3 className="font-bold text-white mb-4">Property Contacts</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+                <div>
+                  <p className="font-semibold text-white mb-1">Lillie 1 LLC</p>
+                  <a href="mailto:lillie1@rksproperties.io" className="text-blue-400 hover:text-blue-300">lillie1@rksproperties.io</a>
+                </div>
+                <div>
+                  <p className="font-semibold text-white mb-1">Masters 1 LLC</p>
+                  <a href="mailto:masters1@rksproperties.io" className="text-blue-400 hover:text-blue-300">masters1@rksproperties.io</a>
+                </div>
+                <div>
+                  <p className="font-semibold text-white mb-1">Clinton I LLC</p>
+                  <a href="mailto:clinton1@rksproperties.io" className="text-blue-400 hover:text-blue-300">clinton1@rksproperties.io</a>
+                </div>
+                <div>
+                  <p className="font-semibold text-white mb-1">Wyndham Meadows 1 LLC</p>
+                  <a href="mailto:wyndham1@rksproperties.io" className="text-blue-400 hover:text-blue-300">wyndham1@rksproperties.io</a>
+                </div>
               </div>
             </div>
-            <div className="border-t border-gray-800 pt-8">
-              <p className="text-sm text-gray-400 mb-4">
-                The properties listed on this website are managed by RKS Properties Holdings, LLC. Each property operates independently under its own separate limited liability company (LLC). This website is for informational purposes only and does not imply joint ownership or control over the individual properties.
+            <div className="border-t border-slate-700 pt-8">
+              <p className="text-sm text-slate-400 mb-4">
+                The properties listed on this website are managed by RKS Properties. Each property operates independently under its own separate limited liability company (LLC). This website is for informational purposes only and does not imply joint ownership or control over individual properties.
               </p>
-              <p className="text-xs text-gray-500">
-                General inquiries: <a href="mailto:info@rksproperties.io" className="text-blue-400 hover:underline">info@rksproperties.io</a>
+              <p className="text-xs text-slate-500">
+                General inquiries: <a href="mailto:info@rksproperties.io" className="text-blue-400 hover:text-blue-300">info@rksproperties.io</a>
               </p>
             </div>
           </div>
