@@ -7,7 +7,7 @@ const geistMono = Geist_Mono({ variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
   title: "RKS Properties Holdings, LLC | DFW Rentals",
-  description: "DFW rental properties available for lease",
+  description: "Professional residential property management in Dallas-Fort Worth",
 };
 
 export default function RootLayout({
@@ -19,6 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geist.variable} ${geistMono.variable} bg-slate-900 text-white`}>
         {children}
+        <!-- Logo injected in header components -->
         <footer className="border-t border-slate-700 bg-slate-950 mt-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-300 text-sm">
             <p className="mb-3">RKS Properties Holdings, LLC © 2026</p>

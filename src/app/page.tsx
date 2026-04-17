@@ -11,9 +11,8 @@ export default function Home() {
     <main className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
       <header className="border-b border-slate-700">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-3">
-          <img src="/rks-logo.svg" alt="RKS" className="w-8 h-8" />
-          <h1 className="text-2xl font-bold text-white">RKS Properties Holdings, LLC</h1>
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
+          <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-12" />
         </nav>
       </header>
 
