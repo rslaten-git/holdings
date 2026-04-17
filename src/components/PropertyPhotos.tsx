@@ -10,25 +10,16 @@ interface PropertyPhotosProps {
 export default function PropertyPhotos({ photos }: PropertyPhotosProps) {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  if (!photos || photos.length === 0) {
-    return null;
-  }
-
-  const handleNext = () => {
-    setSelectedIndex((prev) => (prev + 1) % photos.length);
-  };
-
-  const handlePrev = () => {
-    setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length);
-  };
+  if (!photos || photos.length === 0) return null;
 
   return (
     <div className="mb-12">
-      <h2 className="text-3xl font-bold text-white mb-6">Photo Gallery</h2>
+      <h2 className="text-white font-bold text-2xl tracking-wide mb-2">Photo Gallery</h2>
+      <div className="gold-divider mb-6" />
 
-      <div className="space-y-6">
+      <div className="space-y-4">
         {/* Main Photo */}
-        <div className="relative rounded-xl overflow-hidden border border-slate-700 bg-slate-900 aspect-video">
+        <div className="relative rounded-xl overflow-hidden border border-[#C5A55A]/20 bg-[#111] aspect-video">
           <img
             src={photos[selectedIndex]}
             alt={`Property photo ${selectedIndex + 1}`}
@@ -37,52 +28,41 @@ export default function PropertyPhotos({ photos }: PropertyPhotosProps) {
           {photos.length > 1 && (
             <>
               <button
-                onClick={handlePrev}
-                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10"
-                aria-label="Previous photo"
+                onClick={() => setSelectedIndex((prev) => (prev - 1 + photos.length) % photos.length)}
+                className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 border border-[#C5A55A]/40 text-[#C5A55A] p-2 rounded-full hover:bg-black/80 transition-all z-10"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-5 h-5" />
               </button>
               <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors z-10"
-                aria-label="Next photo"
+                onClick={() => setSelectedIndex((prev) => (prev + 1) % photos.length)}
+                className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 border border-[#C5A55A]/40 text-[#C5A55A] p-2 rounded-full hover:bg-black/80 transition-all z-10"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-5 h-5" />
               </button>
+              <div className="absolute bottom-3 right-4 bg-black/60 text-[#C5A55A] text-xs px-3 py-1 rounded-full border border-[#C5A55A]/30">
+                {selectedIndex + 1} / {photos.length}
+              </div>
             </>
           )}
         </div>
 
         {/* Thumbnails */}
         {photos.length > 1 && (
-          <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2">
+          <div className="grid grid-cols-5 md:grid-cols-8 lg:grid-cols-10 gap-2">
             {photos.map((photo, idx) => (
               <button
                 key={idx}
                 onClick={() => setSelectedIndex(idx)}
                 className={`rounded-lg overflow-hidden border-2 transition-all aspect-square ${
                   idx === selectedIndex
-                    ? 'border-blue-500 ring-2 ring-blue-500/50'
-                    : 'border-slate-600 hover:border-slate-500'
+                    ? 'border-[#C5A55A] ring-1 ring-[#C5A55A]/50'
+                    : 'border-[#333] hover:border-[#C5A55A]/50 opacity-60 hover:opacity-100'
                 }`}
-                aria-label={`View photo ${idx + 1}`}
               >
-                <img
-                  src={photo}
-                  alt={`Thumbnail ${idx + 1}`}
-                  className="w-full h-full object-cover"
-                />
+                <img src={photo} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
               </button>
             ))}
           </div>
-        )}
-
-        {/* Photo Count */}
-        {photos.length > 1 && (
-          <p className="text-sm text-slate-400 text-center">
-            Photo {selectedIndex + 1} of {photos.length}
-          </p>
         )}
       </div>
     </div>

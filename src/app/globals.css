@@ -1,8 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #f5f0e8;
+  --gold: #C5A55A;
+  --gold-light: #D4B96A;
+  --gold-dark: #9E7E3A;
+  --gold-muted: #8B6914;
+  --charcoal: #111111;
+  --charcoal-2: #1a1a1a;
+  --charcoal-3: #222222;
 }
 
 @theme inline {
@@ -12,15 +19,35 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Gold gradient text */
+.gold-text {
+  background: linear-gradient(135deg, #C5A55A 0%, #E8D08A 50%, #C5A55A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle gold shimmer on hero */
+.hero-pattern {
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, rgba(197, 165, 90, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 50%, rgba(197, 165, 90, 0.05) 0%, transparent 60%);
+}
+
+/* Gold border hover effect */
+.card-gold:hover {
+  border-color: #C5A55A;
+  box-shadow: 0 0 30px rgba(197, 165, 90, 0.15);
+}
+
+/* Divider line */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C5A55A, transparent);
 }
