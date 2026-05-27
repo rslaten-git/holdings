@@ -1,7 +1,6 @@
-'use client';
-
+import Image from 'next/image';
 import Link from 'next/link';
-import { MapPin, Bed, Bath, Car } from 'lucide-react';
+import { Bed, Bath, Car } from 'lucide-react';
 import { properties } from '@/lib/properties';
 
 export default function HomePage() {
@@ -14,10 +13,13 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="relative flex items-center justify-center">
             {/* Logo floats left */}
-            <img
+            <Image
               src="/rks-logo.png"
               alt="RKS Properties Holdings"
-              className="absolute left-0 h-44 opacity-95 hidden lg:block"
+              width={176}
+              height={176}
+              className="absolute left-0 h-44 w-auto opacity-95 hidden lg:block"
+              priority
             />
             {/* Centered text */}
             <div className="text-center">
@@ -45,10 +47,12 @@ export default function HomePage() {
               <div className="card-gold h-full bg-[#111] rounded-xl border border-[#333] transition-all duration-300 overflow-hidden">
                 {/* Photo */}
                 <div className="h-48 relative overflow-hidden bg-[#1a1a1a]">
-                  <img
+                  <Image
                     src={property.thumbnail}
                     alt={property.address}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   {/* Occupied badge */}
                   <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-[#0a0a0a]/80 border border-[#C5A55A]/60 text-[#C5A55A] text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm">
