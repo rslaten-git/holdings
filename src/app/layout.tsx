@@ -6,6 +6,7 @@ const geist = Geist({ variable: "--font-geist-sans" });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rksproperties.io"),
   title: "RKS Properties Holdings, LLC | DFW Rentals",
   description: "Professional residential property management in Dallas-Fort Worth",
 };

@@ -1,27 +1,50 @@
-'use client';
-
-import { useParams } from 'next/navigation';
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { properties } from '@/lib/properties';
-import { Building2, MapPin, Bed, Bath, Car, Calendar, Ruler, CheckCircle } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { Bed, Bath, Car, Calendar, Ruler, CheckCircle } from 'lucide-react';
 import PropertyPhotos from '@/components/PropertyPhotos';
+import { getProperty, getPropertySlugs } from '@/lib/properties';
 
-export default function PropertyDetail() {
-  const params = useParams();
-  const slug = params?.slug as string;
-  const property = slug ? properties[slug] : null;
+type PropertyDetailProps = {
+  params: Promise<{
+    slug: string;
+  }>;
+};
+
+export function generateStaticParams() {
+  return getPropertySlugs().map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: PropertyDetailProps): Promise<Metadata> {
+  const { slug } = await params;
+  const property = getProperty(slug);
 
   if (!property) {
-    return (
-      <main className="min-h-screen bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-          <h1 className="text-3xl font-bold text-white mb-4">Property Not Found</h1>
-          <Link href="/" className="text-[#C5A55A] hover:text-[#D4B96A] font-semibold">
-            ← Back to Properties
-          </Link>
-        </div>
-      </main>
-    );
+    return {
+      title: 'Property Not Found | RKS Properties',
+    };
+  }
+
+  const description = `${property.bedrooms} bed, ${property.bathrooms} bath ${property.type.toLowerCase()} rental property in ${property.city}, ${property.state}.`;
+
+  return {
+    title: `${property.address} | RKS Properties`,
+    description,
+    openGraph: {
+      title: `${property.address} | RKS Properties`,
+      description,
+      images: [property.thumbnail],
+    },
+  };
+}
+
+export default async function PropertyDetail({ params }: PropertyDetailProps) {
+  const { slug } = await params;
+  const property = getProperty(slug);
+
+  if (!property) {
+    notFound();
   }
 
   return (
@@ -30,7 +53,7 @@ export default function PropertyDetail() {
       <header className="border-b border-[#C5A55A]/20 bg-[#0a0a0a]/95 backdrop-blur-sm sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
           <Link href="/" className="hover:opacity-80 transition-opacity">
-            <img src="/rks-logo.png" alt="RKS Properties Holdings" className="h-10" />
+            <Image src="/rks-logo.png" alt="RKS Properties Holdings" width={160} height={40} className="h-10 w-auto" priority />
           </Link>
           <Link href="/" className="text-[#C5A55A] hover:text-[#D4B96A] transition-colors text-xs tracking-widest uppercase font-semibold">
             ← All Properties
@@ -40,10 +63,13 @@ export default function PropertyDetail() {
 
       {/* Hero Image */}
       <div className="w-full h-72 md:h-[480px] relative overflow-hidden">
-        <img
+        <Image
           src={property.thumbnail}
           alt={property.address}
-          className="w-full h-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 pb-8">

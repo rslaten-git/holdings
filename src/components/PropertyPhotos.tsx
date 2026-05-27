@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -20,10 +21,12 @@ export default function PropertyPhotos({ photos }: PropertyPhotosProps) {
       <div className="space-y-4">
         {/* Main Photo */}
         <div className="relative rounded-xl overflow-hidden border border-[#C5A55A]/20 bg-[#111] aspect-video">
-          <img
+          <Image
             src={photos[selectedIndex]}
             alt={`Property photo ${selectedIndex + 1}`}
-            className="w-full h-full object-cover"
+            fill
+            sizes="(min-width: 1280px) 1280px, 100vw"
+            className="object-cover"
           />
           {photos.length > 1 && (
             <>
@@ -59,7 +62,9 @@ export default function PropertyPhotos({ photos }: PropertyPhotosProps) {
                     : 'border-[#333] hover:border-[#C5A55A]/50 opacity-60 hover:opacity-100'
                 }`}
               >
-                <img src={photo} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                <span className="relative block w-full h-full">
+                  <Image src={photo} alt={`Thumbnail ${idx + 1}`} fill sizes="10vw" className="object-cover" />
+                </span>
               </button>
             ))}
           </div>

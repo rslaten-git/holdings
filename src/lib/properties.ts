@@ -204,3 +204,7 @@ export const properties: Record<string, Property> = {
 export function getProperty(slug: string): Property | null {
   return properties[slug] || null;
 }
+
+export function getPropertySlugs(): string[] {
+  return Object.keys(properties);
+}
