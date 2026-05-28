@@ -3,6 +3,12 @@ import Link from 'next/link';
 import { Bed, Bath, Car } from 'lucide-react';
 import { properties } from '@/lib/properties';
 
+function getPropertyCardAddress(address: string) {
+  return address.startsWith('21') && address.includes('Wyndham Meadows Way')
+    ? address.replace(' Way', '')
+    : address;
+}
+
 export default function HomePage() {
   const propertyList = Object.values(properties);
 
@@ -68,7 +74,7 @@ export default function HomePage() {
                 {/* Content */}
                 <div className="p-5">
                   <h3 className="text-white font-bold text-lg mb-1 group-hover:text-[#C5A55A] transition-colors tracking-wide">
-                    {property.address}
+                    {getPropertyCardAddress(property.address)}
                   </h3>
                   <p className="text-[#C5A55A] font-semibold text-sm mb-1 tracking-wider uppercase">
                     {property.city}, {property.state}
